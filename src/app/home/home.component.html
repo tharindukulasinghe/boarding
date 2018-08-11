@@ -2,37 +2,51 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-4 container">
+    <div class="col-3 container">
       <h4>Search by</h4>
-      <div class="container">
-        <mat-radio-group [(ngModel)] ="list" class="example-radio-group lg" >
-          <mat-radio-button class="active" value="1">Institute  </mat-radio-button>
-          <mat-radio-button value="2">District</mat-radio-button>
-        </mat-radio-group>
-      </div>
+
 
       <mat-form-field *ngIf="list==2">
-        <mat-select [(value)]="selectedd">
-          <mat-option value="{{d.value}}" *ngFor="let d of districts" (selectionChange)="someMethod($event.value)">{{d.name}}</mat-option>
-          
+        <mat-select [(value)]="selectedd" (selectionChange)="selectionChange($event.source.value)">
+          <mat-option value="{{d}}" *ngFor="let d of districts" >{{d}}</mat-option>
+
         </mat-select>
       </mat-form-field>
-
-      <mat-form-field *ngIf="list==1">
-        <mat-select [(value)]="selectedi" >
-          <mat-option value="{{d.value}}" *ngFor="let d of institutes">{{d.name}}</mat-option>       
-        </mat-select>
-      </mat-form-field>
-
-
-
     </div>
-    <div class="col-8">
-      <form action="" class="form-inline">
-          <input class="form-control mr-sm-2 large" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
-        
+
+    <div class="col-9">
+
+      <mat-paginator [length]="count" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = handlepage($event)">
+      </mat-paginator>
+
+      <div *ngIf="noResults" class="alert alert-info" role="alert">
+        Sorry. We can't Find any Results. . .
+      </div>
+
+      <section *ngFor="let ad of items">
+        <div class="py-3">
+          <div class="card">
+            <div class="row ">
+              <div class="col-md-4">
+                <img src="http://localhost:3000/{{ad.photos[0]}}" width="200" height="200">
+              </div>
+              <div class="col-md-8 px-3">
+                <div class="card-block px-3 container">
+                  <h4 class="card-title heading">{{ad.title}}</h4>
+                  <p class="card-text">{{ad.description}}</p>
+                  <h6>{{ad.city}}</h6>
+                  <a href="#" class="btn btn-primary btn-sm">Show More</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+
     </div>
   </div>
 </div>

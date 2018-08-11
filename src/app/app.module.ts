@@ -28,6 +28,8 @@ import { CommonModule } from '@angular/common';
 import { ValidatorDirective } from './compare/validator.directive';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { FileUploadModule } from 'ng2-file-upload';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { AdvertComponent } from './advert/advert.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     SignupComponent,
     CarouselComponent,
     LoginComponent,
-    ValidatorDirective
+    ValidatorDirective,
+    AdvertComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     MatCardModule,
     MatDatepickerModule,
     HttpClientModule,
-    FileUploadModule
+    FileUploadModule,
+    MatPaginatorModule
   ],
   providers: [
     RegisterService,
