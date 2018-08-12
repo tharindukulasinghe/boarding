@@ -67,11 +67,19 @@
                         </div>
                     </div>
 
+                    <div class="alert alert-warning form-group" *ngIf="this.error" role="alert">
+                        {{errorText}}
+                    </div>
+
+
                     <button type="button" class="btn btn-success btn-s" (click)="onSubmit(f.value)" [disabled]="!f.form.valid || !valid()">
                         Post my Ad
                     </button>
 
+                    
                 </form>
+
+                
 
             </div>
         </div>

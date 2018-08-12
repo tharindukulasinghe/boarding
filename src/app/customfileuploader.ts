@@ -35,9 +35,14 @@ export class FileUploaderCustom extends FileUploader {
     }
 
     xhr.onload = () => {
-      let gist = (xhr.status >= 200 && xhr.status < 300) || xhr.status === 304 ? 'Success' : 'Error';
-      var method = 'on' + gist + 'Item';
-      this[method](fakeitem, null, xhr.status, null);
+      const headers = this._parseHeaders(xhr.getAllResponseHeaders());
+            const response = this._transformResponse(xhr.response, headers);
+            const gist = this._isSuccessCode(xhr.status) ? 'Success' : 'Error';
+            const method = '_on' + gist + 'Item';
+            for (const item of this.queue) {
+                this[method](item, response, xhr.status, headers);
+            }
+            this._onCompleteItem(this.queue[0], response, xhr.status, headers);
 
     };
     xhr.onerror = () => {
@@ -49,7 +54,7 @@ export class FileUploaderCustom extends FileUploader {
     };
 
     xhr.open("POST", this.options.url, true);
-    xhr.withCredentials = true;
+    xhr.withCredentials = false;
     if (this.options.headers) {
       for (var _i = 0, _a = this.options.headers; _i < _a.length; _i++) {
         var header = _a[_i];

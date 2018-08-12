@@ -30,6 +30,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { FileUploadModule } from 'ng2-file-upload';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AdvertComponent } from './advert/advert.component';
+import { AdvertSuccessComponent } from './advert-success/advert-success.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { SearchAdvertComponent } from './search-advert/search-advert.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { AdvertComponent } from './advert/advert.component';
     CarouselComponent,
     LoginComponent,
     ValidatorDirective,
-    AdvertComponent
+    AdvertComponent,
+    AdvertSuccessComponent,
+    AdminPanelComponent,
+    SearchAdvertComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +65,10 @@ import { AdvertComponent } from './advert/advert.component';
       { path : 'aboutus', component : AboutUsComponent},
       { path : 'Postad', component : PostadComponent},
       { path : 'signup', component : SignupComponent},
+      { path : 'advert_success', component : AdvertSuccessComponent},
+      { path : 'advert/:_id', component: AdvertComponent },
+      { path : 'admin_panel', component : AdminPanelComponent},
+      { path : 'search/:query', component : SearchAdvertComponent},
     ]),
     BrowserAnimationsModule,
     MatCheckboxModule,

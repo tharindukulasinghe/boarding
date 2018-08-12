@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PageEvent, MatPaginator } from '@angular/material';
 
 
@@ -14,7 +14,7 @@ import { PageEvent, MatPaginator } from '@angular/material';
 export class HomeComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+
   districts;
   selectedd = "All";
   length_;
@@ -23,13 +23,16 @@ export class HomeComponent implements OnInit {
   noResults = true;
   constructor(private http: HttpClient) {
 
-    this.http.get("http://localhost:3000/getcities").subscribe(res => {
+    let head = new HttpHeaders();
+    head.append('Access-Control-Allow-Origin', '*');
+
+    this.http.get("http://localhost:3000/getcities",{headers : head}).subscribe(res => {
       console.log(res);
       this.districts = res;
       this.selectedd = this.districts[0];
     });
 
-    this.http.get("http://localhost:3000/api/advert/length").subscribe(res => {
+    this.http.get("http://localhost:3000/api/advert/length",{headers : head}).subscribe(res => {
       this.length_ = res;
 
       this.count = this.length_.value;
@@ -37,12 +40,12 @@ export class HomeComponent implements OnInit {
       console.log(this.count);
       length = this.count;
       this.noResults = true;
-      if (length !== 0 ){
+      if (length !== 0) {
         this.noResults = false;
       }
     });
 
-    this.http.get("http://localhost:3000/api/advert/getAll?pagesize=10&pagenumber=1&city=All").subscribe(res => {
+    this.http.get("http://localhost:3000/api/advert/getAll?pagesize=10&pagenumber=1&city=All",{headers : head}).subscribe(res => {
       console.log(res);
       this.items = res;
     });
@@ -66,7 +69,7 @@ export class HomeComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  handlepage(event?:PageEvent){
+  handlepage(event?: PageEvent) {
     this.newpage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.http.get(`http://localhost:3000/api/advert/getAll?pagesize=${this.pageSize}&pagenumber=${this.newpage}`).subscribe(res => {
@@ -76,7 +79,7 @@ export class HomeComponent implements OnInit {
   }
 
   selectionChange
-  (value){
+    (value) {
     console.log(value);
     this.http.get(`http://localhost:3000/api/advert/getAllByCity?pagesize=${this.pageSize}&pagenumber=${1}&city=${this.selectedd}`).subscribe(res => {
       console.log(res);
@@ -91,7 +94,7 @@ export class HomeComponent implements OnInit {
       console.log(this.count);
       this.noResults = true;
       length = this.count;
-      if (length !== 0 ){
+      if (length !== 0) {
         this.noResults = false;
       }
     });
