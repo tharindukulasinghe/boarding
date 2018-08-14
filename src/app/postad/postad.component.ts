@@ -11,17 +11,18 @@ import { FileUploadModule, FileUploader, FileUploaderOptions } from 'ng2-file-up
 })
 export class PostadComponent implements OnInit {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+    this.http.get("http://localhost:3000/getcities").subscribe(res => {
+      console.log(res);
+      this.cities = JSON.parse(JSON.stringify(res));
+    });
+   }
 
   length = 0;
   error = false;
   errorText = '';
 
-  cities = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
+  cities;
 
   //public uploader: FileUploader = new FileUploader({ url: 'http://localhost:3000/api/advert/new', itemAlias: 'photos' });
   public uploader: FileUploaderCustom = new FileUploaderCustom({ url: 'http://localhost:3000/api/advert/new' });
@@ -46,7 +47,7 @@ export class PostadComponent implements OnInit {
 
   onSubmit(details) {
       let title : String = details.title; 
-      let tags = title.toLowerCase().split(' ');
+      let tags = details.title;
     //console.log(details);
     this.uploader.onBuildItemForm = (item, form) => {
       form.append('title', details.title);

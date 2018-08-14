@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,8 +11,13 @@ export class LoginComponent implements OnInit {
 
   invalidLogin = false;
   message = "";
-  constructor(private http : HttpClient, private router : Router) { 
-
+  constructor(private http : HttpClient, private router : Router, private route : ActivatedRoute) { 
+    this.invalidLogin = false;
+    let m = this.route.snapshot.queryParamMap.get('m');
+    if(m){
+      this.invalidLogin = true;
+      this.message = "You have to login first";
+    }
   }
 
 

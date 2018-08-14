@@ -16,16 +16,8 @@
 
                     <mat-form-field>
                         <mat-select placeholder="City" name="city" ngModel required>
-                            <mat-option *ngFor="let city of cities" [value]="city.value">
-                                {{city.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field>
-                        <mat-select placeholder="Institute" name="institute" ngModel required>
-                            <mat-option *ngFor="let city of cities" [value]="city.value">
-                                {{city.viewValue}}
+                            <mat-option *ngFor="let city of cities" [value]="city">
+                                {{city}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
