@@ -26,18 +26,15 @@ export class HomeComponent implements OnInit {
     let head = new HttpHeaders();
     head.append('Access-Control-Allow-Origin', '*');
 
-    this.http.get("http://localhost:3000/getcities",{headers : head}).subscribe(res => {
-      console.log(res);
+    this.http.get("http://localhost:3000/getcities", { headers: head }).subscribe(res => {
       this.districts = res;
       this.selectedd = this.districts[0];
     });
 
-    this.http.get("http://localhost:3000/api/advert/length",{headers : head}).subscribe(res => {
+    this.http.get("http://localhost:3000/api/advert/length", { headers: head }).subscribe(res => {
       this.length_ = res;
 
       this.count = this.length_.value;
-      console.log(this.length_.value);
-      console.log(this.count);
       length = this.count;
       this.noResults = true;
       if (length !== 0) {
@@ -45,8 +42,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.http.get("http://localhost:3000/api/advert/getAll?pagesize=10&pagenumber=1&city=All",{headers : head}).subscribe(res => {
-      console.log(res);
+    this.http.get("http://localhost:3000/api/advert/getAll?pagesize=10&pagenumber=1&city=All", { headers: head }).subscribe(res => {
       this.items = res;
     });
 
@@ -62,7 +58,6 @@ export class HomeComponent implements OnInit {
   newpage = 0;
   pageIndex = 0;
 
-  // MatPaginator Output
   pageEvent: PageEvent;
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -73,16 +68,12 @@ export class HomeComponent implements OnInit {
     this.newpage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.http.get(`http://localhost:3000/api/advert/getAll?pagesize=${this.pageSize}&pagenumber=${this.newpage}`).subscribe(res => {
-      console.log(res);
       this.items = res;
     });
   }
 
-  selectionChange
-    (value) {
-    console.log(value);
+  selectionChange(value) {
     this.http.get(`http://localhost:3000/api/advert/getAllByCity?pagesize=${this.pageSize}&pagenumber=${1}&city=${this.selectedd}`).subscribe(res => {
-      console.log(res);
       this.items = res;
     });
     this.paginator.pageIndex = 0;
@@ -90,8 +81,6 @@ export class HomeComponent implements OnInit {
       this.length_ = res;
 
       this.count = this.length_.value;
-      console.log(this.length_.value);
-      console.log(this.count);
       this.noResults = true;
       length = this.count;
       if (length !== 0) {
@@ -99,6 +88,7 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
 
 
 }

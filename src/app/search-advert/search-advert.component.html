@@ -1,6 +1,6 @@
 <div class="container pulldown">
     <h2>Search Results for {{searchQuery}}</h2>
-    <mat-paginator [length]="count" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = handlepage($event)">
+    <mat-paginator [length]="count" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="handlepage($event)">
       </mat-paginator>
       <div *ngIf="noResults" class="alert alert-info" role="alert">
         Sorry. We can't Find any Results. . .

@@ -30,6 +30,8 @@
     "hammerjs": "^2.0.8",
     "ng2-file-upload": "^1.3.0",
     "rxjs": "^6.0.0",
+    "time-ago": "^0.2.1",
+    "time-ago-pipe": "^1.3.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

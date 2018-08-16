@@ -39,7 +39,6 @@ export class AdvertComponent implements OnInit {
           this.images[i] = "http://localhost:3000/".concat(this.images[i]);
         }
         this.phn = this.data.userphonenumber;
-        console.log(this.images);
       });
   });
   }

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvertSuccessComponent implements OnInit {
 
-  constructor() { }
+  advert_id;
+
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.advert_id = params['id'];
+    });
+  }
 
   ngOnInit() {
   }

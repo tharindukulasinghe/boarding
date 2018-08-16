@@ -16,7 +16,7 @@ export class PostadComponent implements OnInit {
       console.log(res);
       this.cities = JSON.parse(JSON.stringify(res));
     });
-   }
+  }
 
   length = 0;
   error = false;
@@ -34,9 +34,9 @@ export class PostadComponent implements OnInit {
     };
 
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log('ImageUpload:uploaded:', item, status, response);
       if (status == 200) {
-        this.router.navigate(['/advert_success']);
+        let id: String = "" + JSON.parse(response).publishedAt;
+        this.router.navigate(['/advert_success', id]);
       }
       else {
         this.error = true;
@@ -46,9 +46,8 @@ export class PostadComponent implements OnInit {
   }
 
   onSubmit(details) {
-      let title : String = details.title; 
-      let tags = details.title;
-    //console.log(details);
+    let title: String = details.title;
+    let tags = details.title;
     this.uploader.onBuildItemForm = (item, form) => {
       form.append('title', details.title);
       form.append('description', details.description);

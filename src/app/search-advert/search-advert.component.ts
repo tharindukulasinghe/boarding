@@ -10,7 +10,7 @@ import { ActivatedRoute } from '../../../node_modules/@angular/router';
 })
 export class SearchAdvertComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
 
   }
 
@@ -30,9 +30,8 @@ export class SearchAdvertComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.search = params['query'];
       this.searchQuery = "";
-      console.log(this.search);
-      let s : String[] = JSON.parse(params['query']);
-      for (let i =0; i < s.length; i++){
+      let s: String[] = JSON.parse(params['query']);
+      for (let i = 0; i < s.length; i++) {
         this.searchQuery += " " + s[i];
       }
       let head = new HttpHeaders();
@@ -40,10 +39,7 @@ export class SearchAdvertComponent implements OnInit {
 
       this.http.get(`http://localhost:3000/api/advert/searchlength?query=${this.search}`, { headers: head }).subscribe(res => {
         this.length_ = res;
-
         this.count = this.length_.value;
-        console.log(this.length_.value);
-        console.log(this.count);
         length = this.count;
         this.noResults = true;
         if (length !== 0) {
@@ -51,10 +47,9 @@ export class SearchAdvertComponent implements OnInit {
         }
       });
 
-      this.http.get(`http://localhost:3000/api/advert/search?pagesize=10&pagenumber=1&city=All&query=${this.search}`,{headers : head}).subscribe(res => {
-      console.log(res);
-      this.items = res;
-    });
+      this.http.get(`http://localhost:3000/api/advert/search?pagesize=10&pagenumber=1&city=All&query=${this.search}`, { headers: head }).subscribe(res => {
+        this.items = res;
+      });
 
 
 
@@ -67,7 +62,6 @@ export class SearchAdvertComponent implements OnInit {
     this.newpage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.http.get(`http://localhost:3000/api/advert/getAllNotApproved?pagesize=${this.pageSize}&pagenumber=${this.newpage}`).subscribe(res => {
-      console.log(res);
       this.items = res;
     });
   }

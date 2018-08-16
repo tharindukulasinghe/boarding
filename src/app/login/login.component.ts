@@ -26,8 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   signIn(details){
-    //this.http.post("")
-    console.log(details);
 
     this.http.post("http://localhost:3000/api/auth/login",details).subscribe(
       (res)=> {
@@ -40,7 +38,6 @@ export class LoginComponent implements OnInit {
         
         this.invalidLogin = true;
         this.message = error.error;
-        console.log(error);
       }
     )
   }

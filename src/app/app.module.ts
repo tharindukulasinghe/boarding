@@ -36,6 +36,7 @@ import { AdvertSuccessComponent } from './advert-success/advert-success.componen
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { SearchAdvertComponent } from './search-advert/search-advert.component';
 import { NoAccessComponent } from './no-access/no-access.component';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NoAccessComponent } from './no-access/no-access.component';
     AdvertSuccessComponent,
     AdminPanelComponent,
     SearchAdvertComponent,
-    NoAccessComponent
+    NoAccessComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,7 @@ import { NoAccessComponent } from './no-access/no-access.component';
       { path : 'aboutus', component : AboutUsComponent},
       { path : 'Postad', component : PostadComponent, canActivate : [AuthGuardService]},
       { path : 'signup', component : SignupComponent},
-      { path : 'advert_success', component : AdvertSuccessComponent},
+      { path : 'advert_success/:id', component : AdvertSuccessComponent},
       { path : 'advert/:_id', component: AdvertComponent },
       { path : 'admin_panel', component : AdminPanelComponent, canActivate : [AuthGuardService, AdminAuthService]},
       { path : 'search/:query', component : SearchAdvertComponent},

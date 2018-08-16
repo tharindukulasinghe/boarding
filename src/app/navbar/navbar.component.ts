@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService : AuthServiceService, private router : Router) { }
+  constructor(public authService : AuthServiceService, private router : Router) { }
 
   search : String;
 
@@ -42,14 +42,12 @@ export class NavbarComponent implements OnInit {
     }
     else {
       let details = helper.decodeToken(token);
-      console.log(details.isAdmin);
       return details.isAdmin;
     }
 
   }
 
   searchQuery(){
-    console.log(this.search);
     let query = this.search.split(" ");
     this.router.navigate(['/search' , JSON.stringify(query)]);
     this.search = "";

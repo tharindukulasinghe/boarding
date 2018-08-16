@@ -39,7 +39,6 @@ export class AuthServiceService {
     }
     else {
       let details = helper.decodeToken(token);
-      console.log(details.isAdmin);
       return details.isAdmin;
     }
 
